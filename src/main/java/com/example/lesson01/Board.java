@@ -1,4 +1,4 @@
-package com.example.quiz;
+package com.example.lesson01;
 
 public class Board {
 	// 필드

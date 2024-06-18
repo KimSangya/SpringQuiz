@@ -1,4 +1,4 @@
-package com.example.quiz;
+package com.example.lesson01;
 
 import java.util.HashMap;
 import java.util.Map;

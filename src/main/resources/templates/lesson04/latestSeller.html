@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>판매자 정보</h1>
+	<img th:src="@{${result.profileImageUrl}}">
+	<h2 th:text="${result.nickname}"></h2>
+	<h3 th:text="${result.temperature}"></h3>
+</body>
+</html>

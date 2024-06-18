@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.example.lesson04.mapper.SellerMapper">
+ 	<insert id="insertSeller" parameterType="map">
+ 		INSERT INTO `seller`
+ 		(
+ 			`nickname`
+			,`profileImageUrl`
+			,`temperature`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{nickname}
+ 			,#{url}
+ 			,#{temperature}
+ 			,NOW()
+ 			,NOW()
+ 		)
+ 	</insert>
+ 	<select id="selectLatestSeller" resultType="com.example.lesson04.domain.Seller">
+ 		SELECT
+ 			`id`
+			,`nickname`
+			,`profileImageUrl`
+			,`temperature`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`seller`
+		ORDER BY `id` DESC
+		LIMIT 1;
+ 	</select>
+ 	
+ </mapper>
