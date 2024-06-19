@@ -21,7 +21,8 @@
  			,NOW()
  		)
  	</insert>
- 	<select id="selectLatestSeller" resultType="com.example.lesson04.domain.Seller">
+ 	
+ 	<select id="selectLatestSellerNull" resultType="com.example.lesson04.domain.Seller">
  		SELECT
  			`id`
 			,`nickname`
@@ -32,6 +33,20 @@
 		FROM
 			`seller`
 		ORDER BY `id` DESC
+		LIMIT 1;
+ 	</select>
+ 	
+ 	<select id="selectLatestSeller" parameterType="int" resultType="com.example.lesson04.domain.Seller">
+ 		SELECT
+ 			`id`
+			,`nickname`
+			,`profileImageUrl`
+			,`temperature`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`seller`
+		ORDER BY `id` = #{id} DESC
 		LIMIT 1;
  	</select>
  	

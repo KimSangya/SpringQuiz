@@ -17,7 +17,11 @@ public class SellerBO {
 		sellerMapper.insertSeller(nickname, url, temperature);
 	}
 	
-	public Seller getLatestSeller() {
-		return sellerMapper.selectLatestSeller();
+	public Seller getLatestSellerNull() {
+		return sellerMapper.selectLatestSellerNull();
+	}
+	
+	public Seller getLatestSeller(int id) {
+		return sellerMapper.selectLatestSeller(id);
 	}
 }

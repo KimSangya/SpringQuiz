@@ -13,5 +13,7 @@ public interface SellerMapper {
 			@Param("url") String url,
 			@Param("temperature") Double temperature);
 	
-	public Seller selectLatestSeller();
+	public Seller selectLatestSellerNull();
+	
+	public Seller selectLatestSeller(int id);
 }

@@ -27,8 +27,8 @@ public class Lesson04Quiz01Controller {
 	@PostMapping("/add-seller")
 	public String addSeller(
 			@RequestParam("nickname") String nickname,
-			@RequestParam("url") String url,
-			@RequestParam("temperature") Double temperature
+			@RequestParam(value = "url", required = false) String url,
+			@RequestParam(value = "temperature", required = false) Double temperature
 			){
 		// DB 저장
 		sellerBO.addSeller(nickname, url, temperature);
@@ -36,12 +36,22 @@ public class Lesson04Quiz01Controller {
 		return "lesson04/afterAddSeller";
 	}
 	
+	// http://localhost:8080/lesson04/quiz01/seller-info-view?id=3
+	
+		Seller seller = null;
+	
 	@GetMapping("/seller-info-view")
-	public String latestSellerView(Model model) {
-		Seller seller = sellerBO.getLatestSeller();
-		
-		model.addAttribute("result", seller);
-		
+	public String latestSellerView(
+				Model model,
+				@RequestParam(value = "id", required = false) Integer id) {
+		if(id == null) {
+			seller = sellerBO.getLatestSellerNull();
+		} 
+		else {
+			seller = sellerBO.getLatestSeller(id);
+		}
+		model.addAttribute("seller", seller);
+		model.addAttribute("title", "판매자 정보");
 		return "lesson04/latestSeller";
 		
 	}
