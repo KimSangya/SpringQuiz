@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+	<h1 th:text="'HOT 5'"></h1>
+		<table class="table text-center">
+			<thead>
+				<tr>
+					<th>순위</th>
+					<th>제목</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="music, status : ${musicRanking}">
+					<td th:text="${status.count}">순위</td>
+					<td th:text="${music}"></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<hr>
+		
+		<h1>멤버십</h1>
+		<table class="table text-center">
+			<thead>
+				<tr>
+					<th>이름</th>
+					<th>전화번호</th>
+					<th>등급</th>
+					<th>포인트</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="member, status : ${membership}">
+					<td th:text="${member.name}"></td>
+					<td th:text="${member.phoneNumber}"></td>
+					<!-- 
+					<td th:if="${member.grade} == 'VIP'" th:text="${member.grade}" class="text-danger"></td>
+					<td th:if="${member.grade} == 'GOLD'" th:text="${member.grade}" class="text-warning"></td>
+					<td th:if="${member.grade} == 'BASIC'"th:text="${member.grade}"></td>
+					<td th:if="${member.point} >= 5000" th:text="${member.point} + 'P'" class="text-primary"></td>
+					<td th:if="${member.point} < 5000" th:text="${member.point} + 'P'"></td>
+					컨트롤 쉬프트 슬래쉬 = 주석
+					-->
+					<td th:text="${member.grade}"></td>
+					<td th:text="${member.point} + 'P'">
+						<span th:unless="${member.point} >= 5000"></span>
+						<span th:if="${member.point} >= 5000" class="text-primary"></span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

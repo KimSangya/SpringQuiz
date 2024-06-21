@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</head>
+<body>
+	<h1>1. 변수</h1>
+	<th:block th:with="number1=36, number2 = 3">
+		<h2 th:text="'첫번째 숫자 : ' + ${number1}"></h2>
+		<h2 th:text="|두번째 숫자 : ${number2}|"></h2>
+		
+		<h1>2. 산술연산</h1>
+		<h2 th:text="'더하기 : ' + ${number1 + number2}"></h2>
+		<h2 th:text="'빼기 : ' + ${number1 - number2}"></h2>
+		<h2 th:text="'곱하기 : ' + ${number1 * number2}"></h2>
+		<h2 th:text="'나누기 : ' + ${number1 / number2}"></h2>
+		
+		<h1>3. 태그 그대로 출력</h1>
+		<div th:utext="'<h3>안녕하세요</h3>'"></div>
+		
+		<h4>4.if와 unless</h4>
+		<th:block th:with="average = ${(number1 + number2)/2.0}">
+			<div th:if="${average >= 10}">
+				<h1 th:text="${average}"></h1>
+			</div>
+			<h3 th:unless="${average >= 10}" th:text=${average}></h3>
+		</th:block>
+	</th:block>	
+</body>
+</html>
