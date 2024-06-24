@@ -50,10 +50,14 @@
 					<td th:if="${member.point} < 5000" th:text="${member.point} + 'P'"></td>
 					컨트롤 쉬프트 슬래쉬 = 주석
 					-->
-					<td th:text="${member.grade}"></td>
-					<td th:text="${member.point} + 'P'">
-						<span th:unless="${member.point} >= 5000"></span>
-						<span th:if="${member.point} >= 5000" class="text-primary"></span>
+					<td th:switch="${member.grade}">
+						<span th:case="'VIP'" class="text-danger" th:text="${member.grade}"></span>
+						<span th:case="'GOLD'" class="text-warning" th:text="${member.grade}"></span>
+						<span th:case="*" th:text="${member.grade}"></span>
+					</td>
+					<td>
+						<span th:if="${member.point} >= 5000" class="text-primary" th:text="${member.point} + 'P'"></span>
+						<span th:unless="${member.point} >= 5000" th:text="${member.point} + 'P'"></span>
 					</td>
 				</tr>
 			</tbody>

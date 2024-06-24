@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<h1 th:text="'회원 정보 리스트'"></h1>
+		<img src="/img/cloudy.jpg"> <!-- static 폴더는 생략하고 그 뒤로 절대경로인 /img 이런식으로 들어가게 된다. css도 이렇게 가능 -->
+		
+		<table class="table text-center">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>이름</th>
+					<th>생년월일</th>
+					<th>전화번호</th>
+					<th>국적</th>
+					<th>이메일</th>
+					<th>자기소개</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="member, status : ${members}">
+					<td th:text="${status.count}"></td>
+					<td th:text="${member.name}"></td>
+					<td th:text="${#temporals.format(member.birth, 'yyy년 M월 d일')}"></td>
+					<td>
+						<span th:if="${#strings.startsWith(member.phoneNumber, '010')}" th:text="${member.phoneNumber}"></span>
+						<span th:unless="${#strings.startsWith(member.phoneNumber, '010')}" th:text="${'유효하지 않은 전화번호'}"></span>
+					</td>
+					<td th:text="${#strings.replace(member.nationality, '시대', ' -')}"></td>
+					<td>
+						<b th:text="${#strings.arraySplit(member.email, '@')[0]}"></b>@<span th:text="${#strings.arraySplit(member.email, '@')[1]}"></span>
+					</td>
+					<td class="text-left">
+						<span th:if="${#strings.length(member.introduce)} >= 15" th:text="${#strings.substring(member.introduce, 0, 15)} + '...'"></span>
+						<span th:unless="${#strings.length(member.introduce)} >= 15" th:text="${member.introduce}"></span>
+					</td>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
