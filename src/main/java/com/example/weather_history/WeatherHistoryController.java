@@ -1,8 +1,11 @@
 package com.example.weather_history;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,11 +38,14 @@ public class WeatherHistoryController {
 	
 	@PostMapping("/add-weather")
 	public String addNewWeather(
-			@ModelAttribute WeatherHistory weatherHistory
+			@RequestParam("date") String date,
+			@RequestParam("weather") String weather,
+			@RequestParam("temperatures") double temperatures,
+			@RequestParam("precipitation") double precipitation,
+			@RequestParam("microDust") String microDust,
+			@RequestParam("windSpeed") double windSpeed
 			,Model model) {
-		weatherHistoryBO.addNewWeather(weatherHistory);
-		List<WeatherHistory> weatherHistorys = weatherHistoryBO.getWeatherHistoryList();
-		model.addAttribute("weatherHistory", weatherHistorys);
-		return "weather_history/weatherList";
+		weatherHistoryBO.addNewWeather(date, weather, temperatures, precipitation, microDust, windSpeed);
+		return "redirect:/weather-history/weather-list-view";
 	}
 }

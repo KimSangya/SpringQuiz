@@ -1,5 +1,6 @@
 package com.example.weather_history.bo;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class WeatherHistoryBO {
 		return weatherHistoryMapper.selectWeatherHistoryList();
 	}
 	
-	public void addNewWeather(WeatherHistory weatherHistory) {
-		weatherHistoryMapper.insertNewWeather(weatherHistory);
+	public void addNewWeather(String date, String weather, double temperatures, double precipitation, String microDust, double windSpeed) {
+		weatherHistoryMapper.insertNewWeather(date, weather, temperatures, precipitation, microDust, windSpeed);
 	}
 }

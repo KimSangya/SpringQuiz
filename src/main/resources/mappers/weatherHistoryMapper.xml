@@ -15,8 +15,7 @@
 			`weather_history`
  	</select>
  	
- 	<insert id="insertNewWeather" parameterType="com.example.weather_history.domain.WeatherHistory"
->
+ 	<insert id="insertNewWeather" parameterType="map">
 		INSERT INTO `weather_history`
 	 		(
 				`date`
