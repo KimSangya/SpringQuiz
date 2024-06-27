@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.example.lesson06.mapper.BookMarkMapper">
+ 	<select id="selectBookmarkList" resultType="com.example.lesson06.domain.BookMark">
+ 		SELECT
+ 			`id`
+ 			,`name`
+			,`url`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`bookmark`
+ 	</select>
+ 	
+ 	<insert id="insertBookMark" parameterType="map">
+ 		INSERT INTO `bookmark`
+ 		(
+ 			`name`
+			,`url`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{name}
+ 			,#{url}
+ 			,NOW()
+ 			,NOW()
+ 		)
+ 	</insert>
+ </mapper>
