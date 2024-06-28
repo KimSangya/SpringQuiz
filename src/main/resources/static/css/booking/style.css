@@ -1,0 +1,17 @@
+@charset "UTF-8";
+header {height:100px;}
+nav {height:40px; background-color:#E3871F;}
+.banner {height:500px;}
+.contents {min-height:500px;}
+.reserve {height:250px;}
+footer {height:80px;}
+
+.nav-item .nav-link:hover {background-color:#A76417;}
+
+.booking-box {width:350px;}
+
+.reserve .real-time-reserved {background-color:#B1520F;}
+.reserve .confirm {background-color: #CF6317;}
+.reserve .inquiry {background-color:#B1520F;}
+
+.reserve-confirm-text {font-size:25px; color:#fff;}

@@ -14,8 +14,9 @@
 		<table class="table text-center">
 			<thead>
 				<tr>
-					<th>사이트명</th>
-					<th>사이트 주소</th>
+					<th>NO</th>
+					<th>이름</th>
+					<th>주소</th>
 					<th>삭제</th>
 				</tr>
 			</thead>
@@ -26,9 +27,62 @@
 					<td>
 						<a th:href="${bookmark.url}" th:text="${bookmark.url}"></a>
 					</td>
+					<td>
+					<!-- 1번 : value로 값 넣기 -->
+					<!-- <button type="button" class="del-btn btn btn-danger" th:value="${bookmark.id}"> 삭제 </button> -->
+						
+						<!-- 2번 데이터(data)로 값 넣기 data-? : -꼭 넣어야하고, 대문자로 넣게 되면 안된다, 무조건 소문자. 키명은 data-를 제외한 ?값을 넣으면 된다. -->
+						<button type="button" class="del-btn btn btn-danger" th:data-bookmark-id="${bookmark.id}"> 삭제 </button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	
+	<script>
+		$(document).ready(function() {
+			// 삭제 버튼 클릭
+			$(".del-btn").on('click', function(e) {
+				/* 
+				 // 1번 value값으로 가져오기
+				let id = $(".del-btn").val().trim();
+				alert(id); 
+				이런식으로 작성을 해버리면 추후에 제일 높은 숫자만 가져오게 된다. 그래서 밑에 부분으로 변경하면 잘 이루어진다.
+				
+				let id = $(this).val().trim(); // 지금 클릭된 버튼의 숫자를 가져오게 된다. 
+				let id = $(this).attr("value"); // 이런식으로 하면 어트리뷰트를 조회해 value 값을 가져온다.
+				
+				let id = e.target.value; // 눌렀을때, 그 펑션을 지정하여, 그 타겟에 가져오는 value 값을 가져온다.
+				*/
+				
+				// 2번 data로 가져오기
+				
+				// 태그에 이름 짓기 : data-bookmark-id
+				// 스크립트에서 꺼내기 : .data("bookmark-id")
+				let id = $(this).data("bookmark-id");
+				// alert(id);
+				
+				$.ajax({
+					// request
+					type:"DELETE"
+					, url:"/lesson06/delete-bookmark"
+					, data:{"id":id}
+					
+					// response
+					, success:function(data) {
+						if(data.code == 200) {
+							// 성공
+							location.reload(true); // 새로고침, 스크롤이 유지 된다.
+						} else if(data.code == 500) { // 요친구는 서버에서 로직상 에러이다.
+							alert(data.error_message); // 로직상 실패
+						}
+					}
+					, error:function() { // 아예 자체가 에러가 났다.
+						alert("삭제하는데 실패했습니다");
+					}
+				});
+			});
+		}) ;
+	</script>
 </body>
 </html>

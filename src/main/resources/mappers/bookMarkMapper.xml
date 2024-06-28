@@ -30,4 +30,25 @@
  			,NOW()
  		)
  	</insert>
+ 	
+ 	<select id="selectBookmarkListByUrl" parameterType="string" resultType="com.example.lesson06.domain.BookMark">
+ 		SELECT
+ 			`id`
+ 			,`name`
+			,`url`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM
+ 			`bookmark`
+ 		WHERE
+ 			`url` = #{url}
+ 	</select>
+ 	
+ 	<delete id="deleteBookmarkById" parameterType="int">
+ 		DELETE
+ 		FROM
+ 			`bookmark`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
  </mapper>

@@ -25,4 +25,17 @@ public class BookMarkBO {
 	public void addBookMark(String name, String url) {
 		bookMarkMapper.insertBookMark(name, url);
 	}
+	
+	// input : url
+	// output : boolean
+	public boolean isDuplicationUrl(String url) {
+		 // 중복 [bookmark1, bookmark2] true / 중복 아닌 : [] false
+		List<BookMark> bookmarkList = bookMarkMapper.selectBookmarkListByUrl(url);
+		return bookmarkList.isEmpty() ? false : true;
+		// return !bookmarkList.isEmpty(); -> true false로 나올수있다.
+	}
+	
+	public int deleteBookmarkById(int id) {
+		return bookMarkMapper.deleteBookmarkById(id);
+	}
 }
