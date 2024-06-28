@@ -21,6 +21,7 @@
 				</label>
 				<input type="button" id="isDuplicationBtn" class="btn btn-info ml-2 h-100 mt-4" value="중복확인">
 			</div>
+			<small id="urlStatusArea"></small>
 			<div class="mt-3">
 				<input type="button" id="addBtn" class="btn btn-success" value="추가">
 			</div>
@@ -31,18 +32,32 @@
 			
 			$("#isDuplicationBtn").on('click', function() {
 				// alert("버튼 눌림");
-				
 				// 초기화
-				$("#url").empty();
-				
+				$("#urlStatusArea").empty();
 				// validation
 				let url = $("#url").val().trim();
 				if(!url) {
-					alert("주소를 입력하세요");
+					$("#urlStatusArea").append('<span class="text-danger"> url이 비어있습니다.</span>');
 					return;
 				}
+				
+				// AJAX 중복확인
+				$.ajax({
+					// request
+					type:"GET"
+					, url:"/lesson06/is-duplication-url"
+					, data:{"url":url}
+					// response
+					, success:function(data) {
+						if(data.is-duplication) {
+							$("#urlStatusArea").append('<span class="text-danger"> 중복된 url입니다.</span>');
+						}
+					}
+					, error:function(error) {
+						alert("url 중복확인에 실패하였습니다.");
+					}
+				});
 			});
-			
 			
 			// 추가 버튼
 			$("#addBtn").on('click', function () {
