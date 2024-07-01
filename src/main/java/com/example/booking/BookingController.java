@@ -96,7 +96,7 @@ public class BookingController {
 		// 응답 값
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
-		result.put("checkingList", checkingList);
+		result.put("checking", checkingList);
 		return result;
 	}
 	

@@ -87,7 +87,11 @@
 					, url:"/booking/check-booking"
 					, data:{"name":name, "phoneNumber":phoneNumber}
 				, success:function(data) {
-					alert(data.checkingList.name); // limit, 최상위 조회
+					 let checkingList = data.checking;
+
+		            // JSON.stringify를 사용하여 객체를 문자열로 변환하여 출력
+		            alert(JSON.stringify(checkingList));
+
 				}, error:function(error) {
 					alert("조회 하는데 문제가 발생하였습니다.");
 				}
