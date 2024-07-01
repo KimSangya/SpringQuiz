@@ -40,12 +40,18 @@
 	            <tbody>
 	            	<tr th:each="book : ${booking}">
 	            		<td th:text="${book.name}"></td>
-	            		<td th:text="${book.headcount}"></td>
+	            		<td th:text="${#temporals.format(book.date, 'yyyy년 M월 d일')}"></td>
 	            		<td th:text="${book.day}"></td>
-	            		<td th:text="${book.name}"></td>
-	            		<td th:text="${book.name}"></td>
-	            		<td th:text="${book.name}"></td>
-	            		<td></td>
+	            		<td th:text="${book.headcount}"></td>
+	            		<td th:text="${book.phoneNumber}"></td>
+	            		<td>
+	            			<span th:if="${book.state=='대기중'}" class="text-info" th:text="${book.state}"></span>
+	            			<span th:if="${book.state=='확정'}" class="text-success" th:text="${book.state}"></span>
+	            			<span th:if="${book.state=='취소'}" class="text-danger" th:text="${book.state}"></span>
+	            		</td>
+	            		<td>
+	            			<button type="button" class="del-btn btn btn-danger" th:text="'삭제'" th:data-booking-id="${book.id}"></button>
+	            		</td>
 	            	</tr>
 	            </tbody>
 			</table>
@@ -57,6 +63,39 @@
 	            Copyright 20XX tongnamu. All right reserved.
 	        </small>
 	    </footer>
-	</div>       
+	</div>
+	<script>
+		$(document).ready(function() {
+			// 삭제 클릭
+			$(".del-btn").on('click', function() {
+				let id = $(this).data('booking-id');
+				alert(id);
+				
+				$.ajax({
+					// request
+					type:"delete"
+				,	url:"/booking/delete-booking"
+				,	data:{"id":id}
+				// response
+				, success:function(data) {
+					// {"code" : 200, "result" : "성공"}
+					if(data.code == 200) {
+						alert("삭제 되었습니다.");
+						location.reload(true);
+					} else if(data.code == 500){
+						// {"code" : 500, "error_message" : "에러의 원인"}
+						alert(data.error_message);
+					}
+				}
+				, error:function(error) {
+					alert("삭제하는데 실패하였습니다 관리자에게 문의해주세요");
+				}
+					
+			});
+				
+				
+		});
+		});
+	</script>
 </body>
 </html>
