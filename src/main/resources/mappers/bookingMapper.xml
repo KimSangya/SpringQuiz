@@ -49,7 +49,7 @@
  		);
  	</insert>
  	
- 	<select id="checkBookingByNameAndPhone" resultType="com.example.booking.domain.Booking">
+ 	<select id="selectBookingListByNamephoneNumber" parameterType="map" resultType="com.example.booking.domain.Booking">
  		SELECT
  			`id`
 			,`name`
@@ -63,9 +63,7 @@
 		FROM
 			`booking`
 		WHERE
-			`name` = #{name} and
-			`phoneNumber` = ${phoneNumber}
-		ORDER BY `id` DESC
-		LIMIT 1
+			`name` = #{name}
+			AND `phoneNumber` = #{phoneNumber}
  	</select>
  </mapper>

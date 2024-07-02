@@ -33,10 +33,17 @@ public class BookingBO {
 		bookingMapper.insertBooking(name, date, day, headcount, phoneNumber);
 	}
 	
-	// @RequestParam("name") String name,
-	// @RequestParam("phoneNumber") String phoneNumber
-	
-	public List<Booking> checkBookingByNameAndPhone(String name, String phoneNumber) {
-		return bookingMapper.checkBookingByNameAndPhone(name, phoneNumber);
+	// input : name, phoneNumber
+	// output : Booking(최신) or null
+	// bo에서 가공하는게 많다.
+	public Booking getLatestBookingByNamephoneNumber(String name, String phoneNumber) { // null or 채워져있는 친구
+		// 리스트가 비어 있을 때는 : [] 있을 때 : [booking1, booking2] 
+		List<Booking> bookingList = bookingMapper.selectBookingListByNamephoneNumber(name, phoneNumber);
+//		if(bookingList.isEmpty()) {
+//			return null;
+//		} else {
+//			return bookingList.get(bookingList.size() - 1);	
+//		}
+		return bookingList.isEmpty() ? null : bookingList.get(bookingList.size() - 1);
 	}
 }
