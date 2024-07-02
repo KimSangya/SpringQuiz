@@ -87,7 +87,7 @@
 					, url:"/booking/check-booking"
 					, data:{"name":name, "phoneNumber":phoneNumber}
 				, success:function(data) {
-					 let checkingList = data.checking;
+					 data.checking;
 
 		            // JSON.stringify를 사용하여 객체를 문자열로 변환하여 출력
 		            alert(JSON.stringify(checkingList));

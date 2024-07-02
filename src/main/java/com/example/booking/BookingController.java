@@ -86,7 +86,7 @@ public class BookingController {
 	
 	@ResponseBody
 	@PostMapping("/check-booking")
-	public Map<String, Object> checkBookingByNameAndPhone(
+	public String checkBookingByNameAndPhone(
 			@RequestParam("name") String name,
 			@RequestParam("phoneNumber") String phoneNumber
 			) {
@@ -94,9 +94,7 @@ public class BookingController {
 		List<Booking> checkingList = bookingBO.checkBookingByNameAndPhone(name, phoneNumber);
 		
 		// 응답 값
-		Map<String, Object> result = new HashMap<>();
-		result.put("code", 200);
-		result.put("checking", checkingList);
+		checkingList.get(1);
 		return result;
 	}
 	
