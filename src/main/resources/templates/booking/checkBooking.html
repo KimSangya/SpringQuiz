@@ -87,11 +87,15 @@
 					, url:"/booking/check-booking"
 					, data:{"name":name, "phoneNumber":phoneNumber}
 				, success:function(data) {
-					 let checkingList = data.checking;
-
-		            // JSON.stringify를 사용하여 객체를 문자열로 변환하여 출력
-		            alert(JSON.stringify(checkingList));
-
+					if(data.code == 500) {
+						// 예약 없음
+						alert(data.error_message);
+					} else if(data.code == 200) {
+						// 성공
+						alert("이름 : " + data.result.name + "\n날짜 : " + data.result.date + "\n일수 : " + data.result.day + "\n인원 : " + data.result.headcount + "\n상태 : " + data.result.state);
+					}
+					// {"code" : 200, "result" : {id : 3, name : "ex이름"..}}
+					// {"code" : 500, "error_message" : "예약 내역이 없습니다."}
 				}, error:function(error) {
 					alert("조회 하는데 문제가 발생하였습니다.");
 				}

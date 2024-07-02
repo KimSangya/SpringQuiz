@@ -86,17 +86,25 @@ public class BookingController {
 	
 	@ResponseBody
 	@PostMapping("/check-booking")
-	public Map<String, Object> checkBookingByNameAndPhone(
+	public Map<String, Object> getLatestBookingByNamephoneNumber(
 			@RequestParam("name") String name,
 			@RequestParam("phoneNumber") String phoneNumber
 			) {
 		// db select
-		List<Booking> checkingList = bookingBO.checkBookingByNameAndPhone(name, phoneNumber);
+		Booking booking = bookingBO.getLatestBookingByNamephoneNumber(name, phoneNumber);
 		
-		// 응답 값
+		// 응답 값 => JSON
 		Map<String, Object> result = new HashMap<>();
-		result.put("code", 200);
-		result.put("checking", checkingList);
+		if(booking != null) {
+			// {"code" : 200, "result" : booking}
+			// {"code" : 200, "result" : {id : 3, name : "ex이름"..}}
+			result.put("code", 200);
+			result.put("result", booking);
+		} else {
+			// {"code" : 500, "error_message" : "예약 내역이 없습니다."}
+			result.put("code", 500);
+			result.put("error_message", "예약 내역이 없습니다.");
+		}
 		return result;
 	}
 	
