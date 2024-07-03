@@ -19,6 +19,9 @@ public class Lesson07Quiz02Controller {
 	@Autowired
 	private RecruitRepository recruitRepository;
 	
+	@Autowired
+	private CompanyRepository companyRepository;
+	
 	@GetMapping("/1")
 	public List<RecruitEntity> quiz01() {
 		// return recruitRepository.findAll();
@@ -27,6 +30,27 @@ public class Lesson07Quiz02Controller {
 	
 	@GetMapping("/2")
 	public List<RecruitEntity> quiz02() {
-		return recruitRepository.findById(8);
+		return recruitRepository.findByCompanyId(1);
+	}
+	
+	@GetMapping("/3")
+	public List<RecruitEntity> quiz03() {
+		return recruitRepository.findByPositionAndType("웹 back-end 개발자", "정규직");
+	}
+	
+	@GetMapping("/4")
+	public List<RecruitEntity> quiz04() {
+		
+		return recruitRepository.findByTypeAndSalaryIsGreaterThan("정규직", 9000);
+	}
+	
+	@GetMapping("/5")
+	public List<RecruitEntity> quiz05() {
+		return recruitRepository.findTop3ByTypeOrderBySalaryDesc("정규직");
+	}
+	
+	@GetMapping("/6")
+	public List<RecruitEntity> quiz06() {
+		return recruitRepository.findByRegionAndSalaryBetween("성남시 분당구", 7000, 8500);
 	}
 }
