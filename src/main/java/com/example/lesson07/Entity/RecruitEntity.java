@@ -2,9 +2,6 @@ package com.example.lesson07.Entity;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,31 +14,39 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-@Table(name = "company")
+@Table(name = "recruit")
 @Getter
 @Entity
-public class CompanyEntity {
+public class RecruitEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String name;
+	@Column(name = "companyId")
+	private int companyId;
 	
-	private String business;
+	private String position;
 	
-	private String scale;
+	private String responsibilities;
 	
-	private int headcount;
+	private String qualification;
 	
-	@CreationTimestamp
+	private String type;
+	
+	private String region;
+	
+	private int salary;
+	
+	private LocalDateTime deadline;
+	
 	@Column(name = "createdAt")
 	private LocalDateTime createdAt;
 	
-	@UpdateTimestamp
 	@Column(name = "updatedAt")
 	private LocalDateTime updatedAt;
 }
