@@ -1,6 +1,10 @@
 package com.example.lesson07.Entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,12 +19,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
+@ToString // 안쪽에 있는 내용을 찍기 쉽게 도와주는 친구
+@AllArgsConstructor // 파라미터 다 있는 생성자
+@NoArgsConstructor // 기본 생성자
+@Getter
 @Builder(toBuilder = true)
 @Table(name = "recruit")
-@Getter
 @Entity
 public class RecruitEntity {
 	@Id
@@ -42,11 +46,13 @@ public class RecruitEntity {
 	
 	private int salary;
 	
-	private LocalDateTime deadline;
+	private LocalDate deadline;
 	
+	@CreationTimestamp
 	@Column(name = "createdAt")
 	private LocalDateTime createdAt;
 	
+	@UpdateTimestamp
 	@Column(name = "updatedAt")
 	private LocalDateTime updatedAt;
 }
